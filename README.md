@@ -5,8 +5,8 @@ Code for our 2021 summer swerve drive
 <br>
 Robot uses Nick Coussens' [2021 Winter Swerve Module](https://www.chiefdelphi.com/t/2021-winter-swerve/391420)
 <br>
-Sensors, Motor Controllers, and Motors
 <br>
+Sensors, Motor Controllers, and Motors:
 - Rev Robotics Spark Max Motor Controller
 - Rev Robotics Neo Motor Controller
 - Rev Robotics Neo 550 Motor Controller
