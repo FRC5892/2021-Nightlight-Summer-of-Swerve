@@ -93,6 +93,7 @@ public class SwerveDriveTrain extends SubsystemBase {
 	public double getTurnRate() {
 		return gyro.getRate();
 	}
+
 	public void stop() {
 		fLSwerveModule.stop();
 		fRSwerveModule.stop();
