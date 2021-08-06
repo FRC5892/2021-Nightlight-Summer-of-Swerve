@@ -37,32 +37,33 @@ public class SwerveModule {
 		driveMotor.getEncoder()
 				.setVelocityConversionFactor(Constants.kSwerveDriveTrain.kDrive.kEncoderConversionFactor);
 		drivePIDController = driveMotor.getPIDController();
-		drivePIDController.setP(Constants.kSwerveDriveTrain.kDrive.kPID.kP);
-		drivePIDController.setI(Constants.kSwerveDriveTrain.kDrive.kPID.kI);
-		drivePIDController.setD(Constants.kSwerveDriveTrain.kDrive.kPID.kD);
+		drivePIDController.setP(Constants.kSwerveDriveTrain.kDrive.kP);
+		drivePIDController.setI(Constants.kSwerveDriveTrain.kDrive.kI);
+		drivePIDController.setD(Constants.kSwerveDriveTrain.kDrive.kD);
 		steerMotor = configuredCANSparkMax(turnMotorID);
 		steerMotor.getEncoder()
 				.setPositionConversionFactor(Constants.kSwerveDriveTrain.kSteer.kEncoderConversionFactor);
 		steerPIDController = steerMotor.getPIDController();
-		steerPIDController.setP(Constants.kSwerveDriveTrain.kDrive.kPID.kP);
-		steerPIDController.setI(Constants.kSwerveDriveTrain.kDrive.kPID.kI);
-		steerPIDController.setD(Constants.kSwerveDriveTrain.kDrive.kPID.kD);
+		steerPIDController.setP(Constants.kSwerveDriveTrain.kDrive.kP);
+		steerPIDController.setI(Constants.kSwerveDriveTrain.kDrive.kI);
+		steerPIDController.setD(Constants.kSwerveDriveTrain.kDrive.kD);
 	}
 
-    public SwerveModuleState getState() {
-        return new SwerveModuleState(driveMotor.getEncoder().getVelocity(), new Rotation2d(steerMotor.getEncoder().getPosition()));
+	public SwerveModuleState getState() {
+		return new SwerveModuleState(driveMotor.getEncoder().getVelocity(),
+				new Rotation2d(steerMotor.getEncoder().getPosition()));
 	}
-	
+
 	public void setDesiredState(SwerveModuleState desiredState) {
 		SwerveModuleState state = SwerveModuleState.optimize(desiredState,
 				new Rotation2d(steerMotor.getEncoder().getPosition()));
 		drivePIDController.setReference(state.speedMetersPerSecond, ControlType.kVelocity);
 		steerPIDController.setReference(state.angle.getRadians(), ControlType.kVelocity);
 
-    }
-    
-    public void resetEncoders() {
-        driveMotor.getEncoder().setPosition(0);
-        steerMotor.getEncoder().setPosition(0);
-    }
+	}
+
+	public void resetEncoders() {
+		driveMotor.getEncoder().setPosition(0);
+		steerMotor.getEncoder().setPosition(0);
+	}
 }

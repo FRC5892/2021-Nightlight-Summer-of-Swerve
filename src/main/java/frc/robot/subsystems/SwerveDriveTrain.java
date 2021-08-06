@@ -47,17 +47,22 @@ public class SwerveDriveTrain extends SubsystemBase {
 		bRSwerveModule = new SwerveModule(7, 8);
 	}
 
-	public void drive(double forward, double strafe, double rotation) {
-		speeds = new ChassisSpeeds(forward, strafe, rotation);
-		SwerveModuleState states[] = kinematics.toSwerveModuleStates(speeds);
-
+	public void drive(double xVelocity, double yVelocity, double rotation, boolean fieldRelative) {
+		SwerveModuleState states[] = kinematics.toSwerveModuleStates(fieldRelative // wierd if else syntax below
+				? ChassisSpeeds.fromFieldRelativeSpeeds(xVelocity, yVelocity, rotation, gyro.getRotation2d())
+				: new ChassisSpeeds(xVelocity, yVelocity, rotation));
+		SwerveDriveKinematics.normalizeWheelSpeeds(states, Constants.kSwerveDriveTrain.kMaxSpeedMetersPerSecond);
+		fLSwerveModule.setDesiredState(states[0]);
+		fRSwerveModule.setDesiredState(states[1]);
+		bLSwerveModule.setDesiredState(states[2]);
+		bRSwerveModule.setDesiredState(states[3]);
 	}
 
 	public Pose2d getPose() {
 		return odometry.getPoseMeters();
 	}
 
-	public void resetOdometry (Pose2d pose) {
+	public void resetOdometry(Pose2d pose) {
 		odometry.resetPosition(pose, gyro.getRotation2d());
 	}
 
@@ -77,41 +82,21 @@ public class SwerveDriveTrain extends SubsystemBase {
 	}
 
 	public void setModuleStates(SwerveModuleState[] desiredStates) {
-		SwerveDriveKinematics.normalizeWheelSpeeds(
-		desiredStates, Constants.kSwerveDriveTrain.kMaxSpeedMetersPerSecond);
+		SwerveDriveKinematics.normalizeWheelSpeeds(desiredStates, Constants.kSwerveDriveTrain.kMaxSpeedMetersPerSecond);
 		fLSwerveModule.setDesiredState(desiredStates[0]);
 		fRSwerveModule.setDesiredState(desiredStates[1]);
 		bLSwerveModule.setDesiredState(desiredStates[2]);
 		bRSwerveModule.setDesiredState(desiredStates[3]);
-	  }
+	}
 
 	public double getTurnRate() {
 		return gyro.getRate();
 	}
 
-	public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
-		var swerveModuleStates =
-			kinematics(
-				fieldRelative
-					? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, gyro.getRotation2d())
-					: new ChassisSpeeds(xSpeed, ySpeed, rot));
-		kinematics.normalizeWheelSpeeds(
-			swerveModuleStates, Constants.kSwerveDriveTrain.kMaxSpeedMetersPerSecond);
-		fLSwerveModule.setDesiredState(swerveModuleStates[0]);
-		fRSwerveModule.setDesiredState(swerveModuleStates[1]);
-		bLSwerveModule.setDesiredState(swerveModuleStates[2]);
-		bRSwerveModule.setDesiredState(swerveModuleStates[3]);
-	  }
-
 	@Override
 	public void periodic() {
 		// This method will be called once per scheduler run
-		odometry.update(
-			gyro.getRotation2d(), 
-			fLSwerveModule.getState(),
-			fRSwerveModule.getState(),
-			bLSwerveModule.getState(),
-			bRSwerveModule.getState()
-			);
+		odometry.update(gyro.getRotation2d(), fLSwerveModule.getState(), bLSwerveModule.getState(),
+				fRSwerveModule.getState(), bRSwerveModule.getState());
 	}
 }
