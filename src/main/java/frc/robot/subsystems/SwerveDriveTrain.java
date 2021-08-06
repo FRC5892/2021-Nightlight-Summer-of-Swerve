@@ -47,10 +47,11 @@ public class SwerveDriveTrain extends SubsystemBase {
 		bRSwerveModule = new SwerveModule(7, 8);
 	}
 
-	public void drive(double xVelocity, double yVelocity, double rotation, boolean fieldRelative) {
+	public void drive(double forwardVelocity, double strafeVelocity, double rotationVelocity, boolean fieldRelative) {
 		SwerveModuleState states[] = kinematics.toSwerveModuleStates(fieldRelative // wierd if else syntax below
-				? ChassisSpeeds.fromFieldRelativeSpeeds(xVelocity, yVelocity, rotation, gyro.getRotation2d())
-				: new ChassisSpeeds(xVelocity, yVelocity, rotation));
+				? ChassisSpeeds.fromFieldRelativeSpeeds(forwardVelocity, strafeVelocity, rotationVelocity,
+						gyro.getRotation2d())
+				: new ChassisSpeeds(forwardVelocity, strafeVelocity, rotationVelocity));
 		SwerveDriveKinematics.normalizeWheelSpeeds(states, Constants.kSwerveDriveTrain.kMaxSpeedMetersPerSecond);
 		fLSwerveModule.setDesiredState(states[0]);
 		fRSwerveModule.setDesiredState(states[1]);
@@ -91,6 +92,12 @@ public class SwerveDriveTrain extends SubsystemBase {
 
 	public double getTurnRate() {
 		return gyro.getRate();
+	}
+	public void stop() {
+		fLSwerveModule.stop();
+		fRSwerveModule.stop();
+		bLSwerveModule.stop();
+		bRSwerveModule.stop();
 	}
 
 	@Override

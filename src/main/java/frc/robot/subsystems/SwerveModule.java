@@ -66,4 +66,9 @@ public class SwerveModule {
 		driveMotor.getEncoder().setPosition(0);
 		steerMotor.getEncoder().setPosition(0);
 	}
+
+	public void stop() {
+		driveMotor.stopMotor();
+		steerMotor.stopMotor();
+	}
 }
