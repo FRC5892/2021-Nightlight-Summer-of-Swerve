@@ -41,10 +41,10 @@ public class SwerveDriveTrain extends SubsystemBase {
 		kinematics = new SwerveDriveKinematics(locationFL, locationFR, locationBL, locationBR);
 		odometry = new SwerveDriveOdometry(kinematics, gyro.getRotation2d());
 
-		fLSwerveModule = new SwerveModule(1, 2);
-		fRSwerveModule = new SwerveModule(3, 4);
-		bLSwerveModule = new SwerveModule(5, 6);
-		bRSwerveModule = new SwerveModule(7, 8);
+		fLSwerveModule = new SwerveModule(1, 2, 0);
+		fRSwerveModule = new SwerveModule(3, 4, 1);
+		bLSwerveModule = new SwerveModule(5, 6, 2);
+		bRSwerveModule = new SwerveModule(7, 8, 3);
 	}
 
 	public void drive(double forwardVelocity, double strafeVelocity, double rotationVelocity, boolean fieldRelative) {

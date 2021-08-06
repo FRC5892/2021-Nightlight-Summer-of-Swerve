@@ -10,6 +10,7 @@ import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.SwerveModuleState;
 import frc.robot.Constants;
@@ -21,6 +22,7 @@ public class SwerveModule {
 	private CANSparkMax steerMotor;
 	private CANPIDController drivePIDController;
 	private CANPIDController steerPIDController;
+	private DutyCycleEncoder steerLampreyEncoder;
 
 	public CANSparkMax configuredCANSparkMax(int ID) {
 		CANSparkMax sparkMax = new SparkMaxWrapper(ID, MotorType.kBrushless);
@@ -32,7 +34,7 @@ public class SwerveModule {
 		return sparkMax;
 	}
 
-	public SwerveModule(int driveMotorID, int turnMotorID) {
+	public SwerveModule(int driveMotorID, int turnMotorID, int lampreyID) {
 		driveMotor = configuredCANSparkMax(driveMotorID);
 		driveMotor.getEncoder()
 				.setVelocityConversionFactor(Constants.kSwerveDriveTrain.kDrive.kEncoderConversionFactor);
@@ -40,9 +42,13 @@ public class SwerveModule {
 		drivePIDController.setP(Constants.kSwerveDriveTrain.kDrive.kP);
 		drivePIDController.setI(Constants.kSwerveDriveTrain.kDrive.kI);
 		drivePIDController.setD(Constants.kSwerveDriveTrain.kDrive.kD);
+		steerLampreyEncoder = new DutyCycleEncoder(lampreyID);
 		steerMotor = configuredCANSparkMax(turnMotorID);
 		steerMotor.getEncoder()
 				.setPositionConversionFactor(Constants.kSwerveDriveTrain.kSteer.kEncoderConversionFactor);
+		// commented out until lampreys are hooked up
+		// steerMotor.getEncoder()
+		// .setPosition(steerLampreyEncoder.get());
 		steerPIDController = steerMotor.getPIDController();
 		steerPIDController.setP(Constants.kSwerveDriveTrain.kDrive.kP);
 		steerPIDController.setI(Constants.kSwerveDriveTrain.kDrive.kI);
