@@ -14,4 +14,21 @@ package frc.robot;
  * reduce verbosity.
  */
 public final class Constants {
+	public final class kSwerveDriveTrain {
+		public static final double kMaxSpeedMetersPerSecond = 13;
+
+		public class kDrive {
+			public static final double kP = 0;
+			public static final double kI = 0;
+			public static final double kD = 0;
+			public static final double kEncoderConversionFactor = 0;
+		}
+
+		public class kSteer {
+			public static final double kP = 0;
+			public static final double kI = 0;
+			public static final double kD = 0;
+			public static final double kEncoderConversionFactor = 0;
+		}
+	}
 }
