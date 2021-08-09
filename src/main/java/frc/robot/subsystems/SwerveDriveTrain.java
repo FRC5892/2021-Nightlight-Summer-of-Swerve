@@ -4,10 +4,11 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.SwerveDriveOdometry;
@@ -27,7 +28,8 @@ public class SwerveDriveTrain extends SubsystemBase {
 	private SwerveModule fRSwerveModule;
 	private SwerveModule bLSwerveModule;
 	private SwerveModule bRSwerveModule;
-	private final Gyro gyro = new ADXRS450_Gyro();
+	// private final Gyro gyro = new ADXRS450_Gyro();
+	private final AHRS gyro = new AHRS(SPI.Port.kMXP);
 
 	public SwerveDriveTrain() {
 		double wheelBase = 1;
