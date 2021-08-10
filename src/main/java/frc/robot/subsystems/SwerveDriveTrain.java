@@ -96,6 +96,13 @@ public class SwerveDriveTrain extends SubsystemBase {
 		return gyro.getRate();
 	}
 
+	public void setMotors(double speed) {
+		fLSwerveModule.setMotors(speed);
+		fRSwerveModule.setMotors(speed);
+		bLSwerveModule.setMotors(speed);
+		bRSwerveModule.setMotors(speed);
+	}
+
 	public void stop() {
 		fLSwerveModule.stop();
 		fRSwerveModule.stop();
