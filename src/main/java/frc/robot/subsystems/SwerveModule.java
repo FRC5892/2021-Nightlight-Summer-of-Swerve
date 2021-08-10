@@ -68,6 +68,11 @@ public class SwerveModule {
 
 	}
 
+	public void setMotors(double speed) {
+		driveMotor.set(speed);
+		steerMotor.set(speed);
+	}
+
 	public void resetEncoders() {
 		driveMotor.getEncoder().setPosition(0);
 		steerMotor.getEncoder().setPosition(0);

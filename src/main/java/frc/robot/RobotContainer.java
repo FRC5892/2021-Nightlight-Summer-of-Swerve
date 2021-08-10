@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.DriveTrainTest;
 import frc.robot.commands.DriveWithJoysticks;
 import frc.robot.subsystems.SwerveDriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -19,6 +20,7 @@ public class RobotContainer {
 	// The robot's subsystems and commands are defined here...
 	private final SwerveDriveTrain swerveDriveTrain = new SwerveDriveTrain();
 	private final DriveWithJoysticks driveWithJoysticks = new DriveWithJoysticks(swerveDriveTrain);
+	private final DriveTrainTest driveTrainTest = new DriveTrainTest(swerveDriveTrain);
 
 	/** The container for the robot. Contains subsystems, OI devices, and commands. */
 	public RobotContainer() {
@@ -33,6 +35,7 @@ public class RobotContainer {
 	 * and then passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
 	 */
 	private void configureButtonBindings() {
+		OperatorInput.driveTrainTestButton.whileHeld(driveTrainTest);
 	}
 
 	/**
