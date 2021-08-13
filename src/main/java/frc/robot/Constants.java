@@ -18,17 +18,17 @@ public final class Constants {
 		public static final double kMaxSpeedMetersPerSecond = 13;
 
 		public class kDrive {
-			public static final double kP = 1;
-			public static final double kI = 1;
-			public static final double kD = 1;
-			public static final double kEncoderConversionFactor = 1;
+			public static final double kP = 0;
+			public static final double kI = 0;
+			public static final double kD = 0;
+			public static final double kEncoderConversionFactor = 6.364;
 		}
 
 		public class kSteer {
-			public static final double kP = 1;
-			public static final double kI = 1;
-			public static final double kD = 1;
-			public static final double kEncoderConversionFactor = 1;
+			public static final double kP = 0;
+			public static final double kI = 0;
+			public static final double kD = 0;
+			public static final double kEncoderConversionFactor = 12.806;
 		}
 	}
 }
