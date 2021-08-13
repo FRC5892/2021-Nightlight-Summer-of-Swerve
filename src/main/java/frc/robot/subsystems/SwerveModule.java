@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
@@ -58,6 +59,14 @@ public class SwerveModule {
 	public SwerveModuleState getState() {
 		return new SwerveModuleState(driveMotor.getEncoder().getVelocity(),
 				new Rotation2d(steerMotor.getEncoder().getPosition()));
+	}
+
+	public CANEncoder getSteerEncoder() {
+		return steerMotor.getEncoder();
+	}
+
+	public CANEncoder getDriveEncoder() {
+		return driveMotor.getEncoder();
 	}
 
 	public void setDesiredState(SwerveModuleState desiredState) {
