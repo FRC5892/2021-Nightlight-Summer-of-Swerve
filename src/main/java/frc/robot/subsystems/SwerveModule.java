@@ -12,6 +12,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.SwerveModuleState;
 import frc.robot.Constants;
@@ -73,8 +74,11 @@ public class SwerveModule {
 		SwerveModuleState state = SwerveModuleState.optimize(desiredState,
 				new Rotation2d(steerMotor.getEncoder().getPosition()));
 		drivePIDController.setReference(state.speedMetersPerSecond, ControlType.kVelocity);
-		steerPIDController.setReference(state.angle.getRadians(), ControlType.kVelocity);
-
+		steerPIDController
+				.setReference(state.angle.getDegrees(), ControlType.kVelocity, 0,
+						new SimpleMotorFeedforward(Constants.kSwerveDriveTrain.kSteer.kS,
+								Constants.kSwerveDriveTrain.kSteer.kV, Constants.kSwerveDriveTrain.kSteer.kA)
+										.calculate(state.angle.getDegrees()));
 	}
 
 	public void setMotors(double speed) {
