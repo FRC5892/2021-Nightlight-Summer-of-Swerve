@@ -19,22 +19,31 @@ public final class Constants {
 
 		public class kDrive {
 			public static final double kEncoderConversionFactor = 6.3636*12.22;
-			public static final double kP = 0.1599 * kEncoderConversionFactor;
+			// public static final double kP = 0.1599 / kEncoderConversionFactor;
+			public static final double kP = 0;
 			public static final double kI = 0;
 			public static final double kD = 0;
-			public static final double kS = 0.20374 * kEncoderConversionFactor;
-			public static final double kV = 0.11873 * kEncoderConversionFactor;
-			public static final double kA = 0.019987 * kEncoderConversionFactor; 
+			// public static final double kS = 0.20374 / kEncoderConversionFactor;
+			// public static final double kV = 0.11873 / kEncoderConversionFactor;
+			// public static final double kA = 0.019987 / kEncoderConversionFactor; 
+			public static final double kS = 0;
+			public static final double kV = 0;
+			public static final double kA = 0;
 		}
 
 		public class kSteer {
-			public static final double kEncoderConversionFactor = 12.80626;
-			public static final double kP = 12.722 * kEncoderConversionFactor;
+			public static final double kEncoderConversionFactor = (1/28.1);//;//12.80626;
+			// public static final double kP = 12.722 / kEncoderConversionFactor;
+			public static final double kP = 0;
 			public static final double kI = 0;
-			public static final double kD = 0.50103 * kEncoderConversionFactor;
-			public static final double kS = 0.3552 * kEncoderConversionFactor;
-			public static final double kV = 0.062932 * kEncoderConversionFactor;
-			public static final double kA = 0.0034717 * kEncoderConversionFactor;
+			// public static final double kD = 0.50103 / kEncoderConversionFactor;
+			public static final double kD = 0;
+			// public static final double kS = 0.3552 / kEncoderConversionFactor;
+			// public static final double kV = 0.062932 / kEncoderConversionFactor;
+			// public static final double kA = 0.0034717 / kEncoderConversionFactor;
+			public static final double kS = 0;
+			public static final double kV = 0;
+			public static final double kA = 0; 
 		}
 	}
 }
