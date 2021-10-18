@@ -119,7 +119,8 @@ public class SwerveDriveTrain extends SubsystemBase {
 		SmartDashboard.putNumber("Steer Encoder", fLSwerveModule.getSteerSparkMax().getEncoder().getPosition());
 		SmartDashboard.putNumber("Drive Encoder", fLSwerveModule.getDriveEncoder().getPosition());
 		SmartDashboard.putNumber("Steer State Position", fLSwerveModule.getState().angle.getDegrees());
-		SmartDashboard.putNumber("Steer State Desired Position", fLSwerveModule.getDesiredSteerState().angle.getDegrees());
+		SmartDashboard.putNumber("Steer State Desired Position",
+				fLSwerveModule.getDesiredSteerState().angle.getDegrees());
 		odometry.update(gyro.getRotation2d(), fLSwerveModule.getState(), bLSwerveModule.getState(),
 				fRSwerveModule.getState(), bRSwerveModule.getState());
 	}

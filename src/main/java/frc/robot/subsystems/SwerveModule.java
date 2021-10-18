@@ -24,33 +24,35 @@ public class SwerveModule {
 	private CANSparkMax steerMotor;
 	private CANPIDController drivePIDController;
 	private CANPIDController steerPIDController;
+	private CANEncoder driveEncoder;
 	private CANEncoder steerEncoder;
 	private DutyCycleEncoder steerLampreyEncoder;
-	private SwerveModuleState swerveState = new SwerveModuleState(180,
-	new Rotation2d(1));
+	private SwerveModuleState swerveState = new SwerveModuleState(180, new Rotation2d(1));
 
-	public CANSparkMax configuredCANSparkMax(int ID, double conversionFactor) {
+	public CANSparkMax configuredCANSparkMax(int ID) {
 		CANSparkMax sparkMax = new SparkMaxWrapper(ID, MotorType.kBrushless);
 		sparkMax.restoreFactoryDefaults();
 		sparkMax.setInverted(false);
 		sparkMax.setIdleMode(IdleMode.kBrake);
 		sparkMax.setSmartCurrentLimit(60);
-		sparkMax.getEncoder().setPositionConversionFactor(conversionFactor);
-		sparkMax.burnFlash();
 		return sparkMax;
 	}
 
 	public SwerveModule(int driveMotorID, int turnMotorID, int lampreyID) {
-		driveMotor = configuredCANSparkMax(driveMotorID, Constants.kSwerveDriveTrain.kDrive.kEncoderConversionFactor);
+		driveMotor = configuredCANSparkMax(driveMotorID);
+		driveEncoder = driveMotor.getEncoder();
+		driveEncoder.setPositionConversionFactor(Constants.kSwerveDriveTrain.kDrive.kEncoderConversionFactor);
+		driveEncoder.setVelocityConversionFactor(Constants.kSwerveDriveTrain.kDrive.kEncoderConversionFactor / 60);
+
 		drivePIDController = driveMotor.getPIDController();
 		drivePIDController.setP(Constants.kSwerveDriveTrain.kDrive.kP);
 		drivePIDController.setI(Constants.kSwerveDriveTrain.kDrive.kI);
 		drivePIDController.setD(Constants.kSwerveDriveTrain.kDrive.kD);
 		steerLampreyEncoder = new DutyCycleEncoder(lampreyID);
-		steerMotor = configuredCANSparkMax(turnMotorID, Constants.kSwerveDriveTrain.kSteer.kEncoderConversionFactor);
+		steerMotor = configuredCANSparkMax(turnMotorID);
 		steerEncoder = steerMotor.getEncoder();
-		// steerMotor.getEncoder()
-		// 		.setVelocityConversionFactor(Constants.kSwerveDriveTrain.kSteer.kEncoderConversionFactor / 60);
+		steerEncoder.setPositionConversionFactor(Constants.kSwerveDriveTrain.kSteer.kEncoderConversionFactor);
+		steerEncoder.setVelocityConversionFactor(Constants.kSwerveDriveTrain.kSteer.kEncoderConversionFactor / 60);
 
 		// commented out until lampreys are hooked up
 		// steerMotor.getEncoder()
@@ -62,8 +64,7 @@ public class SwerveModule {
 	}
 
 	public SwerveModuleState getState() {
-		return new SwerveModuleState(driveMotor.getEncoder().getVelocity(),
-				new Rotation2d(steerEncoder.getPosition()));
+		return new SwerveModuleState(driveMotor.getEncoder().getVelocity(), new Rotation2d(steerEncoder.getPosition()));
 	}
 
 	public CANEncoder getSteerEncoder() {
@@ -80,8 +81,7 @@ public class SwerveModule {
 
 	public void setDesiredState(SwerveModuleState desiredState) {
 		swerveState = desiredState;
-		SwerveModuleState state = SwerveModuleState.optimize(desiredState,
-				new Rotation2d(steerEncoder.getPosition()));
+		SwerveModuleState state = SwerveModuleState.optimize(desiredState, new Rotation2d(steerEncoder.getPosition()));
 		drivePIDController.setReference(state.speedMetersPerSecond, ControlType.kVelocity);
 		steerPIDController
 				.setReference(state.angle.getDegrees(), ControlType.kVelocity, 0,
