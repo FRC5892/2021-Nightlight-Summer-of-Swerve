@@ -116,7 +116,7 @@ public class SwerveDriveTrain extends SubsystemBase {
 	@Override
 	public void periodic() {
 		// This method will be called once per scheduler run
-		SmartDashboard.putNumber("Steer Encoder", fLSwerveModule.getSteerSparkMax().getEncoder().getPosition());
+		SmartDashboard.putNumber("Steer Encoder", fLSwerveModule.getSteerEncoder().getPosition());
 		SmartDashboard.putNumber("Drive Encoder", fLSwerveModule.getDriveEncoder().getPosition());
 		SmartDashboard.putNumber("Steer State Position", fLSwerveModule.getState().angle.getDegrees());
 		SmartDashboard.putNumber("Steer State Desired Position",

@@ -32,18 +32,18 @@ public final class Constants {
 		}
 
 		public class kSteer {
-			public static final double kEncoderConversionFactor = (1 / 28.1);// ;//12.80626;
-			// public static final double kP = 12.722 / kEncoderConversionFactor;
-			public static final double kP = 0;
+			public static final double kEncoderConversionFactor = (1/28.1)*(2*Math.PI);// converts from motor rotations to radians of steer rotation
+			public static final double kP = 12.722 * kEncoderConversionFactor;
+			// public static final double kP = 0;
 			public static final double kI = 0;
-			// public static final double kD = 0.50103 / kEncoderConversionFactor;
-			public static final double kD = 0;
-			// public static final double kS = 0.3552 / kEncoderConversionFactor;
-			// public static final double kV = 0.062932 / kEncoderConversionFactor;
-			// public static final double kA = 0.0034717 / kEncoderConversionFactor;
-			public static final double kS = 0;
-			public static final double kV = 0;
-			public static final double kA = 0;
+			public static final double kD = 0.50103 * kEncoderConversionFactor;
+			// public static final double kD = 0;
+			public static final double kS = 0.3552 * kEncoderConversionFactor;
+			public static final double kV = 0.062932 * kEncoderConversionFactor;
+			public static final double kA = 0.0034717 * kEncoderConversionFactor;
+			// public static final double kS = 0;
+			// public static final double kV = 0;
+			// public static final double kA = 0;
 		}
 	}
 }
