@@ -44,10 +44,10 @@ public class SwerveDriveTrain extends SubsystemBase {
 		kinematics = new SwerveDriveKinematics(locationFL, locationFR, locationBL, locationBR);
 		odometry = new SwerveDriveOdometry(kinematics, gyro.getRotation2d());
 
-		fLSwerveModule = new SwerveModule(1, 2, 0);
-		fRSwerveModule = new SwerveModule(3, 4, 1);
-		bLSwerveModule = new SwerveModule(5, 6, 2);
-		bRSwerveModule = new SwerveModule(7, 8, 3);
+		fLSwerveModule = new SwerveModule(1, 2, 1);
+		fRSwerveModule = new SwerveModule(3, 4, 3);
+		bLSwerveModule = new SwerveModule(5, 6, 5);
+		bRSwerveModule = new SwerveModule(7, 8, 7);
 
 		resetEncoders();
 	}
@@ -116,8 +116,9 @@ public class SwerveDriveTrain extends SubsystemBase {
 	@Override
 	public void periodic() {
 		// This method will be called once per scheduler run
-		SmartDashboard.putNumber("Steer Encoder", fLSwerveModule.getSteerEncoder().getPosition());
-		SmartDashboard.putNumber("Drive Encoder", fLSwerveModule.getDriveEncoder().getPosition());
+		SmartDashboard.putNumber("Steer Position", fLSwerveModule.getSteerPosition());
+		SmartDashboard.putNumber("Lamprey", fLSwerveModule.getLampreyPosition());
+		SmartDashboard.putNumber("Drive Positon", fLSwerveModule.getDrivePosition());
 		SmartDashboard.putNumber("Steer State Position", fLSwerveModule.getState().angle.getDegrees());
 		SmartDashboard.putNumber("Steer State Desired Position",
 				fLSwerveModule.getDesiredSteerState().angle.getDegrees());
