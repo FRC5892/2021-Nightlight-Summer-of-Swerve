@@ -44,6 +44,7 @@ public class SwerveModule {
 		drivePIDController.setP(Constants.kSwerveDriveTrain.kDrive.kP);
 		drivePIDController.setI(Constants.kSwerveDriveTrain.kDrive.kI);
 		drivePIDController.setD(Constants.kSwerveDriveTrain.kDrive.kD);
+		driveMotor.burnFlash();
 
 		steerLampreyEncoder = new DutyCycleEncoder(lampreyID);
 
@@ -54,6 +55,7 @@ public class SwerveModule {
 		steerPIDController.setP(Constants.kSwerveDriveTrain.kDrive.kP);
 		steerPIDController.setI(Constants.kSwerveDriveTrain.kDrive.kI);
 		steerPIDController.setD(Constants.kSwerveDriveTrain.kDrive.kD);
+		steerMotor.burnFlash();
 	}
 
 	public double getLampreyPosition() {
