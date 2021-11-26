@@ -33,8 +33,8 @@ public class SwerveDriveTrain extends SubsystemBase {
 	private final AHRS gyro = new AHRS(SPI.Port.kMXP);
 
 	public SwerveDriveTrain() {
-		double wheelBase = 1;
-		double trackWidth = 2;
+		double wheelBase = 0.434;
+		double trackWidth = 0.382;
 
 		locationFL = new Translation2d(wheelBase / 2, trackWidth / 2);
 		locationFR = new Translation2d(wheelBase / 2, -trackWidth / 2);
