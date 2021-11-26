@@ -26,9 +26,8 @@ public class DriveWithJoysticks extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		swerveDriveTrain.drive(OperatorInput.driverJoystick.getRawAxis(1) * 30,
-				OperatorInput.driverJoystick.getRawAxis(0) * 30, OperatorInput.driverJoystick.getRawAxis(4) * 30,
-				false);
+		swerveDriveTrain.drive(OperatorInput.driverJoystick.getRawAxis(1), OperatorInput.driverJoystick.getRawAxis(0),
+				OperatorInput.driverJoystick.getRawAxis(4), false);
 	}
 
 	// Called once the command ends or is interrupted.
