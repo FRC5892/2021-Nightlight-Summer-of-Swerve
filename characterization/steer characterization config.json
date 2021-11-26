@@ -1,0 +1,36 @@
+{
+  "counts per rotation": 1.0,
+  "encoder type": "Built-In",
+  "encoding": false,
+  "gearing": 1.0,
+  "gyro": "NavX",
+  "gyro ctor": "SerialPort.kMXP",
+  "is drivetrain": false,
+  "motor controllers": [
+    "SPARK MAX (Brushless)"
+  ],
+  "number of samples per average": 1,
+  "primary encoder inverted": false,
+  "primary encoder ports": [
+    0,
+    1
+  ],
+  "primary motor ports": [
+    2
+  ],
+  "primary motors inverted": [
+    false
+  ],
+  "secondary encoder inverted": false,
+  "secondary encoder ports": [
+    2,
+    3
+  ],
+  "secondary motor ports": [
+    3
+  ],
+  "secondary motors inverted": [
+    false
+  ],
+  "velocity measurement period": 100
+}
