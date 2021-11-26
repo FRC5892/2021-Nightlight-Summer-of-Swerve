@@ -20,7 +20,8 @@ public class DriveTrainTest extends CommandBase {
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
-		swerveDriveTrain.setMotors(.25);
+		swerveDriveTrain.resetEncoders();
+		swerveDriveTrain.setMotors(.1);
 	}
 
 	// Called every time the scheduler runs while the command is scheduled.

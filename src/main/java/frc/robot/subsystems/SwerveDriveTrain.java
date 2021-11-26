@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.wpilibj.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -43,10 +44,12 @@ public class SwerveDriveTrain extends SubsystemBase {
 		kinematics = new SwerveDriveKinematics(locationFL, locationFR, locationBL, locationBR);
 		odometry = new SwerveDriveOdometry(kinematics, gyro.getRotation2d());
 
-		fLSwerveModule = new SwerveModule(1, 2, 0);
-		fRSwerveModule = new SwerveModule(3, 4, 1);
-		bLSwerveModule = new SwerveModule(5, 6, 2);
-		bRSwerveModule = new SwerveModule(7, 8, 3);
+		fLSwerveModule = new SwerveModule(1, 2, 1);
+		fRSwerveModule = new SwerveModule(3, 4, 3);
+		bLSwerveModule = new SwerveModule(5, 6, 5);
+		bRSwerveModule = new SwerveModule(7, 8, 7);
+
+		resetEncoders();
 	}
 
 	public void drive(double forwardVelocity, double strafeVelocity, double rotationVelocity, boolean fieldRelative) {
@@ -113,6 +116,11 @@ public class SwerveDriveTrain extends SubsystemBase {
 	@Override
 	public void periodic() {
 		// This method will be called once per scheduler run
+		SmartDashboard.putNumber("Steer Position", fLSwerveModule.getSteerPosition());
+		SmartDashboard.putNumber("Lamprey", fLSwerveModule.getLampreyPosition());
+		SmartDashboard.putNumber("Drive Positon", fLSwerveModule.getDrivePosition());
+		SmartDashboard.putNumber("Steer State Position", fLSwerveModule.getState().angle.getRadians());
+		SmartDashboard.putNumber("Steer State Desired Position", fLSwerveModule.getDesiredState().angle.getRadians());
 		odometry.update(gyro.getRotation2d(), fLSwerveModule.getState(), bLSwerveModule.getState(),
 				fRSwerveModule.getState(), bRSwerveModule.getState());
 	}
