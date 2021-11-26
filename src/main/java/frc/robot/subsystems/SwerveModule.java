@@ -91,7 +91,7 @@ public class SwerveModule {
 		// Conversion factor divided by 60 to convert from rotations per minute to meters per second
 		steerPIDController.setReference(
 				swerveState.angle.getRadians() / Constants.kSwerveDriveTrain.kSteer.kEncoderConversionFactor,
-				ControlType.kVelocity);
+				ControlType.kPosition);
 	}
 
 	public void setMotors(double speed) {
