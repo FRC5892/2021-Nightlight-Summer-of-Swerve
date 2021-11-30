@@ -44,10 +44,10 @@ public class SwerveDriveTrain extends SubsystemBase {
 		kinematics = new SwerveDriveKinematics(locationFL, locationFR, locationBL, locationBR);
 		odometry = new SwerveDriveOdometry(kinematics, gyro.getRotation2d());
 
-		fLSwerveModule = new SwerveModule(1, 2, 1);
-		fRSwerveModule = new SwerveModule(3, 4, 3);
-		bLSwerveModule = new SwerveModule(5, 6, 5);
-		bRSwerveModule = new SwerveModule(7, 8, 7);
+		fLSwerveModule = new SwerveModule(1, 2, 1, -0.86);
+		fRSwerveModule = new SwerveModule(3, 4, 3, -2.44);
+		bLSwerveModule = new SwerveModule(5, 6, 5, -5.43);
+		bRSwerveModule = new SwerveModule(7, 8, 7, -4.29);
 
 		resetEncoders();
 	}
@@ -116,8 +116,15 @@ public class SwerveDriveTrain extends SubsystemBase {
 	@Override
 	public void periodic() {
 		// This method will be called once per scheduler run
-		SmartDashboard.putNumber("Steer Position", fLSwerveModule.getSteerPosition());
-		SmartDashboard.putNumber("Lamprey", fLSwerveModule.getLampreyPosition());
+		SmartDashboard.putNumber("FL Steer Position", fLSwerveModule.getSteerPosition());
+		SmartDashboard.putNumber("FR Steer Position", fRSwerveModule.getSteerPosition());
+		SmartDashboard.putNumber("BL Steer Position", bLSwerveModule.getSteerPosition());
+		SmartDashboard.putNumber("BR Steer Position", bRSwerveModule.getSteerPosition());
+		SmartDashboard.putNumber("FL Lamprey", fLSwerveModule.getLampreyPosition());
+		SmartDashboard.putNumber("FR Lamprey", fRSwerveModule.getLampreyPosition());
+		SmartDashboard.putNumber("BL Lamprey", bLSwerveModule.getLampreyPosition());
+		SmartDashboard.putNumber("BR Lamprey", bRSwerveModule.getLampreyPosition());
+
 		SmartDashboard.putNumber("Drive Positon", fLSwerveModule.getDrivePosition());
 		SmartDashboard.putNumber("Steer State Position", fLSwerveModule.getState().angle.getRadians());
 		SmartDashboard.putNumber("Steer State Desired Position", fLSwerveModule.getDesiredState().angle.getRadians());

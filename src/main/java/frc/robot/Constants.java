@@ -20,7 +20,7 @@ public final class Constants {
 		public class kDrive {
 			public static final double kEncoderConversionFactor = 198d / 1260 * (Math.PI * 0.09525);
 			// 198d denotes 198 in double form so that math works
-			public static final double kP = 0.00019444;
+			public static final double kP = 0.000019444;
 			public static final double kI = 0;
 			public static final double kD = 0;
 			// public static final double kP = 0;
@@ -35,9 +35,9 @@ public final class Constants {
 		public class kSteer {
 			public static final double kEncoderConversionFactor = (1 / 28.1) * (2 * Math.PI);
 			// converts from motor rotations to radians of steer rotation
-			public static final double kP = 4.2874;
-			public static final double kD = 45.791;
-			public static final double kI = 0;
+			public static final double kP = 1;
+			public static final double kD = 0;
+			public static final double kI = 0.0003;
 			// public static final double kP = 0;
 			// public static final double kD = 0;
 			public static final double kS = 0.3552;
