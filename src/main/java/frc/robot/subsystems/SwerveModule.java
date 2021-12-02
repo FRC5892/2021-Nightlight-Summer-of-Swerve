@@ -54,10 +54,12 @@ public class SwerveModule {
 		steerEncoder = steerMotor.getEncoder();
 		steerEncoder.setPosition(steerLampreyEncoder.get()/Constants.kSwerveDriveTrain.kSteer.kEncoderConversionFactor);
 		steerPIDController = steerMotor.getPIDController();
-		steerPIDController.setP(Constants.kSwerveDriveTrain.kDrive.kP);
-		steerPIDController.setI(Constants.kSwerveDriveTrain.kDrive.kI);
-		steerPIDController.setD(Constants.kSwerveDriveTrain.kDrive.kD);
+		steerPIDController.setP(Constants.kSwerveDriveTrain.kSteer.kP);
+		steerPIDController.setI(Constants.kSwerveDriveTrain.kSteer.kI);
+		steerPIDController.setD(Constants.kSwerveDriveTrain.kSteer.kD);
 		steerMotor.burnFlash();
+		setPositionZero();
+
 	}
 
 	public double getLampreyPosition() {
@@ -104,6 +106,10 @@ public class SwerveModule {
 	public void resetEncoders() {
 		driveEncoder.setPosition(0);
 		steerEncoder.setPosition(0);
+	}
+	
+	public void setPositionZero() {
+		steerMotor.set(0);
 	}
 
 	public void stop() {
