@@ -24,6 +24,13 @@ public final class Constants {
 			public static final double kI = 0;
 			public static final double kD = 0;
 
+			// SmartMotion Constants
+			public static final double kMaxAcceleration = 1500;
+			public static final double kMinVelocity = 0;
+			public static final double kMaxVelocity = 2000;
+			public static final double kAllowedError = 0.02;
+
+			// Characterization Constants
 			public static final double kS = 0.20374;
 			public static final double kV = 0.11873;
 			public static final double kA = 0.019987;
@@ -36,6 +43,7 @@ public final class Constants {
 			public static final double kI = 0.0003;
 			public static final double kD = 0;
 
+			// Characterization Constants
 			public static final double kS = 0.3552;
 			public static final double kV = 0.062932;
 			public static final double kA = 0.0034717;
