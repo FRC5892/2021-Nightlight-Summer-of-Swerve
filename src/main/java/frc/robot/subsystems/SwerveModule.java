@@ -52,8 +52,7 @@ public class SwerveModule {
 
 		steerMotor = configuredCANSparkMax(turnMotorID);
 		steerEncoder = steerMotor.getEncoder();
-		steerEncoder
-				.setPosition(getLampreyPosition() / Constants.kSwerveDriveTrain.kSteer.kEncoderConversionFactor);
+		steerEncoder.setPosition(getLampreyPosition() / Constants.kSwerveDriveTrain.kSteer.kEncoderConversionFactor);
 		steerPIDController = steerMotor.getPIDController();
 		steerPIDController.setP(Constants.kSwerveDriveTrain.kSteer.kP);
 		steerPIDController.setI(Constants.kSwerveDriveTrain.kSteer.kI);
