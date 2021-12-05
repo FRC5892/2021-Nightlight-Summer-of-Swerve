@@ -94,7 +94,8 @@ public class SwerveModule {
 				ControlType.kVelocity);
 		// Conversion factor divided by 60 to convert from rotations per minute to meters per second
 		steerPIDController.setReference(
-				swerveState.angle.getRadians() / Constants.kSwerveDriveTrain.kSteer.kEncoderConversionFactor,
+				(swerveState.angle.getRadians() - new Rotation2d(getSteerPosition()).getRadians() + getSteerPosition())
+						/ Constants.kSwerveDriveTrain.kSteer.kEncoderConversionFactor,
 				ControlType.kPosition);
 	}
 
