@@ -30,7 +30,7 @@ public class SwerveModule {
 	private double lampreyOffset;
 
 	public CANSparkMax configuredCANSparkMax(int ID) {
-		CANSparkMax sparkMax = new CANSparkMax(ID, MotorType.kBrushless);
+		CANSparkMax sparkMax = new SparkMaxWrapper(ID, MotorType.kBrushless);
 		sparkMax.restoreFactoryDefaults();
 		sparkMax.setInverted(false);
 		sparkMax.setIdleMode(IdleMode.kBrake);
@@ -52,7 +52,8 @@ public class SwerveModule {
 
 		steerMotor = configuredCANSparkMax(turnMotorID);
 		steerEncoder = steerMotor.getEncoder();
-		steerEncoder.setPosition(steerLampreyEncoder.get()/Constants.kSwerveDriveTrain.kSteer.kEncoderConversionFactor);
+		steerEncoder
+				.setPosition(steerLampreyEncoder.get() / Constants.kSwerveDriveTrain.kSteer.kEncoderConversionFactor);
 		steerPIDController = steerMotor.getPIDController();
 		steerPIDController.setP(Constants.kSwerveDriveTrain.kSteer.kP);
 		steerPIDController.setI(Constants.kSwerveDriveTrain.kSteer.kI);
@@ -63,7 +64,7 @@ public class SwerveModule {
 	}
 
 	public double getLampreyPosition() {
-		return ((steerLampreyEncoder.get()*125.664)-6.28319)+lampreyOffset; // add conversion factor
+		return (steerLampreyEncoder.get() * 125.664) - 6.28319 + lampreyOffset;
 	}
 
 	public SwerveModuleState getState() {
@@ -83,7 +84,7 @@ public class SwerveModule {
 	}
 
 	public double getSteerPosition() {
-		return (steerEncoder.getPosition() * Constants.kSwerveDriveTrain.kSteer.kEncoderConversionFactor);
+		return steerEncoder.getPosition() * Constants.kSwerveDriveTrain.kSteer.kEncoderConversionFactor;
 	}
 
 	public void setDesiredState(SwerveModuleState desiredState) {
@@ -107,7 +108,7 @@ public class SwerveModule {
 		driveEncoder.setPosition(0);
 		steerEncoder.setPosition(0);
 	}
-	
+
 	public void setPositionZero() {
 		steerMotor.set(0);
 	}
