@@ -11,4 +11,4 @@ Sensors, Motor Controllers, and Motors:
 - Rev Robotics Neo Motor Controller
 - Rev Robotics Neo 550 Motor Controller
 - Lamprey Encoder
-- Analog Devices ADSRX 453 Gyro
+- NavX Gyro
