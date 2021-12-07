@@ -29,7 +29,6 @@ public class SwerveDriveTrain extends SubsystemBase {
 	private SwerveModule fRSwerveModule;
 	private SwerveModule bLSwerveModule;
 	private SwerveModule bRSwerveModule;
-	// private final Gyro gyro = new ADXRS450_Gyro();
 	private final AHRS gyro = new AHRS(SPI.Port.kMXP);
 
 	public SwerveDriveTrain() {
@@ -43,12 +42,12 @@ public class SwerveDriveTrain extends SubsystemBase {
 
 		kinematics = new SwerveDriveKinematics(locationFL, locationFR, locationBL, locationBR);
 		odometry = new SwerveDriveOdometry(kinematics, gyro.getRotation2d());
-
+		
 		fLSwerveModule = new SwerveModule(1, 2, 1, -0.86);
 		fRSwerveModule = new SwerveModule(3, 4, 3, -2.44);
 		bLSwerveModule = new SwerveModule(5, 6, 5, -5.43);
 		bRSwerveModule = new SwerveModule(7, 8, 7, -4.29);
-
+		
 		resetEncoders();
 	}
 
