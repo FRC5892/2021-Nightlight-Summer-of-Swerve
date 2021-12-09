@@ -63,7 +63,7 @@ public class SwerveModule {
 	}
 
 	public double getLampreyPosition() {
-		return (steerLampreyEncoder.get() * 125.664) - 6.28319 + lampreyOffset;
+		return steerLampreyEncoder.get() * 125.664 - 6.28319 + lampreyOffset;
 	}
 
 	public SwerveModuleState getState() {
@@ -76,10 +76,6 @@ public class SwerveModule {
 
 	public double getDrivePosition() {
 		return driveEncoder.getPosition() * Constants.kSwerveDriveTrain.kDrive.kEncoderConversionFactor;
-	}
-
-	public double getDriveVelocity() {
-		return driveEncoder.getVelocity() * (Constants.kSwerveDriveTrain.kDrive.kEncoderConversionFactor / 60);
 	}
 
 	public double getSteerPosition() {
