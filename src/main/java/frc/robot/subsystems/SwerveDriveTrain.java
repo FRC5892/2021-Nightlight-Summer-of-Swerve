@@ -35,19 +35,19 @@ public class SwerveDriveTrain extends SubsystemBase {
 		double wheelBase = 0.434;
 		double trackWidth = 0.382;
 
-		locationFL = new Translation2d(wheelBase / 2, trackWidth / 2);
-		locationFR = new Translation2d(wheelBase / 2, -trackWidth / 2);
-		locationBL = new Translation2d(-wheelBase / 2, trackWidth / 2);
-		locationBR = new Translation2d(-wheelBase / 2, -trackWidth / 2);
+		locationFR = new Translation2d(wheelBase / 2, trackWidth / 2);
+		locationFL = new Translation2d(wheelBase / 2, -trackWidth / 2);
+		locationBR = new Translation2d(-wheelBase / 2, trackWidth / 2);
+		locationBL = new Translation2d(-wheelBase / 2, -trackWidth / 2);
 
 		kinematics = new SwerveDriveKinematics(locationFL, locationFR, locationBL, locationBR);
 		odometry = new SwerveDriveOdometry(kinematics, gyro.getRotation2d());
-		
-		fLSwerveModule = new SwerveModule(1, 2, 1, -0.86);
-		fRSwerveModule = new SwerveModule(3, 4, 3, -2.44);
-		bLSwerveModule = new SwerveModule(5, 6, 5, -5.43);
-		bRSwerveModule = new SwerveModule(7, 8, 7, -4.29);
-		
+
+		fRSwerveModule = new SwerveModule(1, 2, 1, -0.86);
+		fLSwerveModule = new SwerveModule(3, 4, 3, -2.44);
+		bRSwerveModule = new SwerveModule(5, 6, 5, -5.43);
+		bLSwerveModule = new SwerveModule(7, 8, 7, -4.29);
+
 		resetEncoders();
 	}
 
