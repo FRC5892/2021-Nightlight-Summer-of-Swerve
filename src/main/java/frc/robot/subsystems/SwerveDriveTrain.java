@@ -75,7 +75,7 @@ public class SwerveDriveTrain extends SubsystemBase {
 		fLSwerveModule.resetEncoders();
 		fRSwerveModule.resetEncoders();
 		bLSwerveModule.resetEncoders();
-		fRSwerveModule.resetEncoders();
+		bRSwerveModule.resetEncoders();
 	}
 
 	public void zeroHeading() {
