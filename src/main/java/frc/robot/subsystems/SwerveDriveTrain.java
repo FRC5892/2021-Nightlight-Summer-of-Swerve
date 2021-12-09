@@ -124,7 +124,7 @@ public class SwerveDriveTrain extends SubsystemBase {
 		SmartDashboard.putNumber("BL Lamprey", bLSwerveModule.getLampreyPosition());
 		SmartDashboard.putNumber("BR Lamprey", bRSwerveModule.getLampreyPosition());
 
-		SmartDashboard.putNumber("Drive Positon", fLSwerveModule.getDrivePosition());
+		SmartDashboard.putNumber("FL Drive Positon", fLSwerveModule.getDrivePosition());
 		SmartDashboard.putNumber("Steer State Position", fLSwerveModule.getState().angle.getRadians());
 		SmartDashboard.putNumber("Steer State Desired Position", fLSwerveModule.getDesiredState().angle.getRadians());
 		odometry.update(gyro.getRotation2d(), fLSwerveModule.getState(), bLSwerveModule.getState(),
