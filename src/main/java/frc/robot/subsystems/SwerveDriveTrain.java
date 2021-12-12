@@ -128,6 +128,7 @@ public class SwerveDriveTrain extends SubsystemBase {
 		SmartDashboard.putNumber("Steer State Position", fLSwerveModule.getState().angle.getRadians());
 		SmartDashboard.putNumber("Steer State Desired Position", fLSwerveModule.getDesiredState().angle.getRadians());
 		odometry.update(gyro.getRotation2d(), fLSwerveModule.getState(), bLSwerveModule.getState(),
+				// the order of the swerve modules here might cause issues
 				fRSwerveModule.getState(), bRSwerveModule.getState());
 	}
 }
