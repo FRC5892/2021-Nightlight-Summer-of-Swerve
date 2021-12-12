@@ -29,25 +29,24 @@ public class SwerveDriveTrain extends SubsystemBase {
 	private SwerveModule fRSwerveModule;
 	private SwerveModule bLSwerveModule;
 	private SwerveModule bRSwerveModule;
-	// private final Gyro gyro = new ADXRS450_Gyro();
 	private final AHRS gyro = new AHRS(SPI.Port.kMXP);
 
 	public SwerveDriveTrain() {
 		double wheelBase = 0.434;
 		double trackWidth = 0.382;
 
-		locationFL = new Translation2d(wheelBase / 2, trackWidth / 2);
-		locationFR = new Translation2d(wheelBase / 2, -trackWidth / 2);
-		locationBL = new Translation2d(-wheelBase / 2, trackWidth / 2);
-		locationBR = new Translation2d(-wheelBase / 2, -trackWidth / 2);
+		locationFR = new Translation2d(wheelBase / 2, trackWidth / 2);
+		locationFL = new Translation2d(wheelBase / 2, -trackWidth / 2);
+		locationBR = new Translation2d(-wheelBase / 2, trackWidth / 2);
+		locationBL = new Translation2d(-wheelBase / 2, -trackWidth / 2);
 
 		kinematics = new SwerveDriveKinematics(locationFL, locationFR, locationBL, locationBR);
 		odometry = new SwerveDriveOdometry(kinematics, gyro.getRotation2d());
 
-		fLSwerveModule = new SwerveModule(1, 2, 1, -0.86);
-		fRSwerveModule = new SwerveModule(3, 4, 3, -2.44);
-		bLSwerveModule = new SwerveModule(5, 6, 5, -5.43);
-		bRSwerveModule = new SwerveModule(7, 8, 7, -4.29);
+		fRSwerveModule = new SwerveModule(1, 2, 1, -0.86);
+		fLSwerveModule = new SwerveModule(3, 4, 3, -2.44);
+		bRSwerveModule = new SwerveModule(5, 6, 5, -5.43);
+		bLSwerveModule = new SwerveModule(7, 8, 7, -4.29);
 
 		resetEncoders();
 	}
@@ -76,7 +75,7 @@ public class SwerveDriveTrain extends SubsystemBase {
 		fLSwerveModule.resetEncoders();
 		fRSwerveModule.resetEncoders();
 		bLSwerveModule.resetEncoders();
-		fRSwerveModule.resetEncoders();
+		bRSwerveModule.resetEncoders();
 	}
 
 	public void zeroHeading() {
@@ -125,7 +124,7 @@ public class SwerveDriveTrain extends SubsystemBase {
 		SmartDashboard.putNumber("BL Lamprey", bLSwerveModule.getLampreyPosition());
 		SmartDashboard.putNumber("BR Lamprey", bRSwerveModule.getLampreyPosition());
 
-		SmartDashboard.putNumber("Drive Positon", fLSwerveModule.getDrivePosition());
+		SmartDashboard.putNumber("FL Drive Positon", fLSwerveModule.getDrivePosition());
 		SmartDashboard.putNumber("Steer State Position", fLSwerveModule.getState().angle.getRadians());
 		SmartDashboard.putNumber("Steer State Desired Position", fLSwerveModule.getDesiredState().angle.getRadians());
 		odometry.update(gyro.getRotation2d(), fLSwerveModule.getState(), bLSwerveModule.getState(),
