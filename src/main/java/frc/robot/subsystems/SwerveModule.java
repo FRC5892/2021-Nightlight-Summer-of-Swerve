@@ -52,7 +52,6 @@ public class SwerveModule {
 
 		steerMotor = configuredCANSparkMax(turnMotorID);
 		steerEncoder = steerMotor.getEncoder();
-		steerEncoder.setPosition(getLampreyPosition() / Constants.kSwerveDriveTrain.kSteer.kEncoderConversionFactor);
 		steerPIDController = steerMotor.getPIDController();
 		steerPIDController.setP(Constants.kSwerveDriveTrain.kSteer.kP);
 		steerPIDController.setI(Constants.kSwerveDriveTrain.kSteer.kI);
@@ -83,14 +82,9 @@ public class SwerveModule {
 	public void setDesiredState(SwerveModuleState desiredState) {
 		desiredSwerveState = desiredState;
 		swerveState = SwerveModuleState.optimize(desiredState, new Rotation2d(getSteerPosition()));
-		drivePIDController.setReference(
-				swerveState.speedMetersPerSecond / (Constants.kSwerveDriveTrain.kDrive.kEncoderConversionFactor / 60),
-				ControlType.kVelocity);
+		drivePIDController.setReference(0, ControlType.kVelocity);
 		// Conversion factor divided by 60 to convert from rotations per minute to meters per second
-		steerPIDController.setReference(
-				(swerveState.angle.getRadians() - new Rotation2d(getSteerPosition()).getRadians() + getSteerPosition())
-						/ Constants.kSwerveDriveTrain.kSteer.kEncoderConversionFactor,
-				ControlType.kPosition);
+		steerPIDController.setReference(0, ControlType.kPosition);
 	}
 
 	public void setMotors(double speed) {
@@ -100,7 +94,7 @@ public class SwerveModule {
 
 	public void resetEncoders() {
 		driveEncoder.setPosition(0);
-		steerEncoder.setPosition(0);
+		steerEncoder.setPosition(getLampreyPosition());
 	}
 
 	public void stop() {
