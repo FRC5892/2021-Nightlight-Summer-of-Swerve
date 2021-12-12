@@ -58,7 +58,6 @@ public class SwerveModule {
 		steerPIDController.setI(Constants.kSwerveDriveTrain.kSteer.kI);
 		steerPIDController.setD(Constants.kSwerveDriveTrain.kSteer.kD);
 		steerMotor.burnFlash();
-		setPositionZero();
 
 	}
 
@@ -103,10 +102,6 @@ public class SwerveModule {
 	public void resetEncoders() {
 		driveEncoder.setPosition(0);
 		steerEncoder.setPosition(0);
-	}
-
-	public void setPositionZero() {
-		steerMotor.set(0);
 	}
 
 	public void stop() {
