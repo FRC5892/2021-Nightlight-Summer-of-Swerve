@@ -57,10 +57,10 @@ public class SwerveDriveTrain extends SubsystemBase {
 						gyro.getRotation2d())
 				: new ChassisSpeeds(forwardVelocity, strafeVelocity, rotationVelocity));
 		SwerveDriveKinematics.normalizeWheelSpeeds(states, Constants.kSwerveDriveTrain.kMaxSpeedMetersPerSecond);
-		fLSwerveModule.setDesiredState(states[0]);
-		fRSwerveModule.setDesiredState(states[1]);
-		bLSwerveModule.setDesiredState(states[2]);
-		bRSwerveModule.setDesiredState(states[3]);
+		fRSwerveModule.setDesiredState(states[0]);
+		fLSwerveModule.setDesiredState(states[1]);
+		bRSwerveModule.setDesiredState(states[2]);
+		bLSwerveModule.setDesiredState(states[3]);
 	}
 
 	public Pose2d getPose() {
@@ -72,10 +72,10 @@ public class SwerveDriveTrain extends SubsystemBase {
 	}
 
 	public void resetEncoders() {
-		fLSwerveModule.resetEncoders();
 		fRSwerveModule.resetEncoders();
-		bLSwerveModule.resetEncoders();
+		fLSwerveModule.resetEncoders();
 		bRSwerveModule.resetEncoders();
+		bLSwerveModule.resetEncoders();
 	}
 
 	public void zeroHeading() {
@@ -88,10 +88,10 @@ public class SwerveDriveTrain extends SubsystemBase {
 
 	public void setModuleStates(SwerveModuleState[] desiredStates) {
 		SwerveDriveKinematics.normalizeWheelSpeeds(desiredStates, Constants.kSwerveDriveTrain.kMaxSpeedMetersPerSecond);
-		fLSwerveModule.setDesiredState(desiredStates[0]);
-		fRSwerveModule.setDesiredState(desiredStates[1]);
-		bLSwerveModule.setDesiredState(desiredStates[2]);
-		bRSwerveModule.setDesiredState(desiredStates[3]);
+		fRSwerveModule.setDesiredState(desiredStates[0]);
+		fLSwerveModule.setDesiredState(desiredStates[1]);
+		bRSwerveModule.setDesiredState(desiredStates[2]);
+		bLSwerveModule.setDesiredState(desiredStates[3]);
 	}
 
 	public double getTurnRate() {
@@ -99,30 +99,30 @@ public class SwerveDriveTrain extends SubsystemBase {
 	}
 
 	public void setMotors(double speed) {
-		fLSwerveModule.setMotors(speed);
 		fRSwerveModule.setMotors(speed);
-		bLSwerveModule.setMotors(speed);
+		fLSwerveModule.setMotors(speed);
 		bRSwerveModule.setMotors(speed);
+		bLSwerveModule.setMotors(speed);
 	}
 
 	public void stop() {
-		fLSwerveModule.stop();
 		fRSwerveModule.stop();
-		bLSwerveModule.stop();
+		fLSwerveModule.stop();
 		bRSwerveModule.stop();
+		bLSwerveModule.stop();
 	}
 
 	@Override
 	public void periodic() {
 		// This method will be called once per scheduler run
-		SmartDashboard.putNumber("FL Steer Position", fLSwerveModule.getSteerPosition());
 		SmartDashboard.putNumber("FR Steer Position", fRSwerveModule.getSteerPosition());
-		SmartDashboard.putNumber("BL Steer Position", bLSwerveModule.getSteerPosition());
+		SmartDashboard.putNumber("FL Steer Position", fLSwerveModule.getSteerPosition());
 		SmartDashboard.putNumber("BR Steer Position", bRSwerveModule.getSteerPosition());
-		SmartDashboard.putNumber("FL Lamprey", fLSwerveModule.getLampreyPosition());
+		SmartDashboard.putNumber("BL Steer Position", bLSwerveModule.getSteerPosition());
 		SmartDashboard.putNumber("FR Lamprey", fRSwerveModule.getLampreyPosition());
-		SmartDashboard.putNumber("BL Lamprey", bLSwerveModule.getLampreyPosition());
+		SmartDashboard.putNumber("FL Lamprey", fLSwerveModule.getLampreyPosition());
 		SmartDashboard.putNumber("BR Lamprey", bRSwerveModule.getLampreyPosition());
+		SmartDashboard.putNumber("BL Lamprey", bLSwerveModule.getLampreyPosition());
 
 		SmartDashboard.putNumber("FL Drive Positon", fLSwerveModule.getDrivePosition());
 		SmartDashboard.putNumber("Steer State Position", fLSwerveModule.getState().angle.getRadians());
