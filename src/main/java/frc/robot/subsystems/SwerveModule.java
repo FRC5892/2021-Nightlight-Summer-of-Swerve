@@ -58,7 +58,6 @@ public class SwerveModule {
 		steerPIDController.setI(Constants.kSwerveDriveTrain.kSteer.kI);
 		steerPIDController.setD(Constants.kSwerveDriveTrain.kSteer.kD);
 		steerMotor.burnFlash();
-
 	}
 
 	public double getLampreyPosition() {
