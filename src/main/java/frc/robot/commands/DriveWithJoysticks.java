@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.OperatorInput;
 import frc.robot.subsystems.SwerveDriveTrain;
 
@@ -26,8 +27,10 @@ public class DriveWithJoysticks extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		swerveDriveTrain.drive(OperatorInput.driverJoystick.getRawAxis(1) * 30,
-				OperatorInput.driverJoystick.getRawAxis(0) * 30, OperatorInput.driverJoystick.getRawAxis(4) * 30,
+		swerveDriveTrain.drive(
+				OperatorInput.driverJoystick.getRawAxis(1) * Constants.kSwerveDriveTrain.kMaxSpeedMetersPerSecond,
+				OperatorInput.driverJoystick.getRawAxis(0) * Constants.kSwerveDriveTrain.kMaxSpeedMetersPerSecond,
+				OperatorInput.driverJoystick.getRawAxis(4) * Constants.kSwerveDriveTrain.kMaxSpeedMetersPerSecond,
 				false);
 	}
 

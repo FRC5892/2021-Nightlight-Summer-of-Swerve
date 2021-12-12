@@ -2,9 +2,9 @@
   "counts per rotation": 1.0,
   "encoder type": "Built-In",
   "encoding": false,
-  "gearing": 28.1111,
-  "gyro": "AnalogGyro",
-  "gyro ctor": "0",
+  "gearing": 1.0,
+  "gyro": "NavX",
+  "gyro ctor": "SerialPort.kMXP",
   "is drivetrain": false,
   "motor controllers": [
     "SPARK MAX (Brushless)"
@@ -16,7 +16,7 @@
     1
   ],
   "primary motor ports": [
-    1
+    2
   ],
   "primary motors inverted": [
     false
@@ -27,7 +27,7 @@
     3
   ],
   "secondary motor ports": [
-    2
+    3
   ],
   "secondary motors inverted": [
     false
