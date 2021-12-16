@@ -28,6 +28,7 @@ public class SwerveModule {
 	private SwerveModuleState desiredSwerveState = new SwerveModuleState(0, new Rotation2d(0));
 	private SwerveModuleState swerveState = new SwerveModuleState(0, new Rotation2d(0));
 	private double lampreyOffset;
+	private double steerEncoderOffeset;
 
 	public CANSparkMax configuredCANSparkMax(int ID) {
 		CANSparkMax sparkMax = new SparkMaxWrapper(ID, MotorType.kBrushless);
@@ -52,7 +53,7 @@ public class SwerveModule {
 
 		steerMotor = configuredCANSparkMax(turnMotorID);
 		steerEncoder = steerMotor.getEncoder();
-		steerEncoder.setPosition(getLampreyPosition() / Constants.kSwerveDriveTrain.kSteer.kEncoderConversionFactor);
+		// steerEncoder.setPosition(getLampreyPosition() / Constants.kSwerveDriveTrain.kSteer.kEncoderConversionFactor);
 		steerPIDController = steerMotor.getPIDController();
 		steerPIDController.setP(Constants.kSwerveDriveTrain.kSteer.kP);
 		steerPIDController.setI(Constants.kSwerveDriveTrain.kSteer.kI);
@@ -77,7 +78,7 @@ public class SwerveModule {
 	}
 
 	public double getSteerPosition() {
-		return steerEncoder.getPosition() * Constants.kSwerveDriveTrain.kSteer.kEncoderConversionFactor;
+		return steerEncoder.getPosition() * Constants.kSwerveDriveTrain.kSteer.kEncoderConversionFactor - steerEncoderOffeset;
 	}
 
 	public void setDesiredState(SwerveModuleState desiredState) {
@@ -88,7 +89,7 @@ public class SwerveModule {
 				ControlType.kVelocity);
 		// Conversion factor divided by 60 to convert from rotations per minute to meters per second
 		steerPIDController.setReference(
-				(swerveState.angle.getRadians() - new Rotation2d(getSteerPosition()).getRadians() + getSteerPosition())
+				(swerveState.angle.getRadians() - new Rotation2d(getSteerPosition()).getRadians() + getSteerPosition() + steerEncoderOffeset)
 						/ Constants.kSwerveDriveTrain.kSteer.kEncoderConversionFactor,
 				ControlType.kPosition);
 	}
@@ -99,8 +100,9 @@ public class SwerveModule {
 	}
 
 	public void resetEncoders() {
-		driveEncoder.setPosition(0);
-		steerEncoder.setPosition(0);
+		// driveEncoder.setPosition(0);
+		// steerEncoder.setPosition(0);
+		steerEncoderOffeset = steerEncoder.getPosition() * Constants.kSwerveDriveTrain.kSteer.kEncoderConversionFactor - 0;
 	}
 
 	public void stop() {
