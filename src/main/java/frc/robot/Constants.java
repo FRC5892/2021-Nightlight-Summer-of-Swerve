@@ -20,9 +20,9 @@ public final class Constants {
 		public class kDrive {
 			public static final double kEncoderConversionFactor = 198d / 1260 * (Math.PI * 0.09525);
 			// 198d denotes 198 in double form so that math works
-			public static final double kP = 0.000019444;
+			public static final double kP = 0.000031;
 			public static final double kI = 0;
-			public static final double kD = 0;
+			public static final double kD = 0.0004;
 
 			// SmartMotion Constants
 			public static final double kMaxAcceleration = 1500;
