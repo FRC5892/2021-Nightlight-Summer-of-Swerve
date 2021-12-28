@@ -58,6 +58,10 @@ public class SwerveModule {
 		steerPIDController.setP(Constants.kSwerveDriveTrain.kSteer.kP);
 		steerPIDController.setI(Constants.kSwerveDriveTrain.kSteer.kI);
 		steerPIDController.setD(Constants.kSwerveDriveTrain.kSteer.kD);
+		steerPIDController.setSmartMotionMaxAccel(Constants.kSwerveDriveTrain.kDrive.kMaxAcceleration, 0);
+		steerPIDController.setSmartMotionMinOutputVelocity(Constants.kSwerveDriveTrain.kDrive.kMinVelocity, 0);
+		steerPIDController.setSmartMotionMaxVelocity(Constants.kSwerveDriveTrain.kDrive.kMaxVelocity, 0);
+		steerPIDController.setSmartMotionAllowedClosedLoopError(Constants.kSwerveDriveTrain.kDrive.kAllowedError, 0);
 		steerMotor.burnFlash();
 	}
 
@@ -86,7 +90,7 @@ public class SwerveModule {
 		swerveState = SwerveModuleState.optimize(desiredState, new Rotation2d(getSteerPosition()));
 		drivePIDController.setReference(
 				swerveState.speedMetersPerSecond / (Constants.kSwerveDriveTrain.kDrive.kEncoderConversionFactor / 60),
-				ControlType.kVelocity);
+				ControlType.kSmartVelocity);
 		// Conversion factor divided by 60 to convert from rotations per minute to meters per second
 		steerPIDController.setReference(
 				(swerveState.angle.getRadians() - new Rotation2d(getSteerPosition()).getRadians() + getSteerPosition() + steerEncoderOffeset)
